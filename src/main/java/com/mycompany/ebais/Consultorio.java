@@ -10,19 +10,24 @@ package com.mycompany.ebais;
  */
 public class Consultorio {
     
-    private String consultorio;
-  
+    private String direccion;
 
     public Consultorio() {
     }
 
-    public String getConsultorio() {
-        return consultorio;
+    public Consultorio(String direccion) {
+        this.direccion = direccion;
     }
 
-    public void setConsultorio(String consultorio) {
-        this.consultorio = consultorio;
+    public String getDireccion() {
+        return direccion;
     }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+  
+
     
     
     
