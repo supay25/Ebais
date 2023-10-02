@@ -15,9 +15,9 @@ import java.sql.SQLException;
 public class Conexion {
     
     private static Connection conectar = null;
-    private static String url = "jdbc:mysql://localhost:3306/chiquitinas?serverTimezone=UTC&zeroDateTimeBehavior=CONVERT_TO_NULL";
+    private static String url = "jdbc:mysql://localhost:3306/ebais?serverTimezone=UTC&zeroDateTimeBehavior=CONVERT_TO_NULL";
     private static String usuario = "root";
-    private static String password = "Ygcoti63";
+    private static String password = "JOSMANU18";
 
     public Conexion() {
     }
