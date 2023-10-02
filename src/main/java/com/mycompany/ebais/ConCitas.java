@@ -14,18 +14,19 @@ import java.util.List;
  *
  * @author Jose
  */
-public class ConDoctor extends Conexion{
-    public List<Doctor> lista() {
-        List<Doctor> listaRetorno = new ArrayList<Doctor>();
+public class ConCitas extends Conexion{
+    public List<Citas> lista() {
+        List<Citas> listaRetorno = new ArrayList<Citas>();
         
         try {
-            PreparedStatement stmt = super.getConexion().prepareStatement("SELECT Especialidad, nombre_doctor FROM doctor ORDER BY Id_Doctor");
+            PreparedStatement stmt = super.getConexion().prepareStatement("SELECT Id_doctor,id_paciente,id_consultorio FROM Citas ORDER BY idcitas");
             ResultSet rs = stmt.executeQuery();
 
-            while (rs.next()) {   
-                String Especialidad = rs.getString("Especialidad");
-                String nombre = rs.getString("nombre_doctor");                                        
-                Doctor c = new Doctor(Especialidad,nombre);
+            while (rs.next()) {                  
+                int doctor = rs.getInt("doctor"); 
+                int paciente = rs.getInt("paciente"); 
+                int consultorio = rs.getInt("consultorio"); 
+                Citas c = new Citas(doctor,paciente,consultorio);
                 listaRetorno.add(c);
             }
             rs.close();
@@ -38,18 +39,19 @@ public class ConDoctor extends Conexion{
         return listaRetorno;
     }
     
-        public Doctor Buscar(int idParam) {
-        Doctor c = null;
+        public Citas Buscar(int idParam) {
+        Citas c = null;
         
         try {
-            PreparedStatement stmt = super.getConexion().prepareStatement("SELECT Especialidad, nombre_doctor FROM doctor WHERE Id_Doctor=? ORDER BY Id_Doctor");
+            PreparedStatement stmt = super.getConexion().prepareStatement("SELECT Id_doctor,id_paciente,id_consultorio FROM Citas WHERE idcitas=? ORDER BY idcitas");
             stmt.setInt(1, idParam);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                String Especialidad = rs.getString("Especialidad");
-                String nombre = rs.getString("nombre_doctor");             
-                c = new Doctor(Especialidad, nombre);
+                int doctor = rs.getInt("doctor"); 
+                int paciente = rs.getInt("paciente"); 
+                int consultorio = rs.getInt("consultorio");             
+                c = new Citas(doctor, paciente,consultorio);
             }
             rs.close();
             stmt.close();
@@ -62,12 +64,13 @@ public class ConDoctor extends Conexion{
     }
     
 
-    public void insertar(Doctor c) {
+    public void insertar(Citas c) {
         try {
-            PreparedStatement stmt = super.getConexion().prepareStatement("INSERT INTO doctor(Especialidad, nombre_doctor) VALUES (?,?)");
+            PreparedStatement stmt = super.getConexion().prepareStatement("INSERT INTO citas(Id_doctor,id_paciente,id_consultorio) VALUES (?,?,?)");
 
-            stmt.setString(1, c.getEspecialidad());
-            stmt.setString(2, c.getNombre());
+            stmt.setInt(1, c.getDoctor());
+            stmt.setInt(2, c.getPaciente());
+            stmt.setInt(3, c.getConsultorio());
             
 
             stmt.execute();
@@ -82,12 +85,13 @@ public class ConDoctor extends Conexion{
     
     public void eliminar(int idCliente) {
         try {
-            PreparedStatement stmt = super.getConexion().prepareStatement("DELETE FROM doctor WHERE Id_Doctor = ?");
+            PreparedStatement stmt = super.getConexion().prepareStatement("DELETE FROM citas WHERE idcitas = ?");
             stmt.setInt(1, idCliente);
             stmt.execute();
             stmt.close();
         } catch (SQLException ex) {
             System.out.println("Error al eliminar cliente: " + ex.getMessage());
         } 
-    }   
+    }
+    
 }

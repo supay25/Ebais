@@ -11,7 +11,7 @@ package com.mycompany.ebais;
 public class Expediente {
     
     private String comentario;
-    private Paciente paciente;
+    private int paciente;
 
     public Expediente() {
     }
@@ -26,6 +26,14 @@ public class Expediente {
 
     public String getComentario() {
         return comentario;
+    }
+
+    public void setPaciente(int  paciente) {
+        this.paciente = paciente;
+    }
+
+    public int getPaciente() {
+        return paciente;
     }
     
     

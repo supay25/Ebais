@@ -66,10 +66,10 @@ public class ConExpediente extends Conexion {
 
     public void insertar(Expediente c) {
         try {
-            PreparedStatement stmt = super.getConexion().prepareStatement("INSERT INTO Expediente(comentario) VALUES (?)");
+            PreparedStatement stmt = super.getConexion().prepareStatement("INSERT INTO Expediente(paciente,comentario) VALUES (?,?)");
 
-            stmt.setString(1, c.getComentario());
-           
+            stmt.setString(2, c.getComentario());
+            stmt.setInt(1, c.getPaciente());
             
 
             stmt.execute();
