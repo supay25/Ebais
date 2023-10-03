@@ -109,7 +109,7 @@ public class ConCitas extends Conexion{
                 doctor = rs.getInt("id_doctor");
                 
                 System.out.println(paciente);
-                System.out.println("-----------------------");
+                System.out.println("------------------------");
                 
             }
             System.out.println("Id del doctor: " + doctor + "\n");
