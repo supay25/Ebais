@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  *
- * @author Jose
+ * @author luisd
  */
 public class ConCitas extends Conexion{
     public List<Citas> lista() {
@@ -93,5 +93,41 @@ public class ConCitas extends Conexion{
             System.out.println("Error al eliminar cliente: " + ex.getMessage());
         } 
     }
+    
+    
+    public void pacientesDoc(int idDoctor){
+        
+        
+        try{
+            PreparedStatement stmt = super.getConexion().prepareStatement("SELECT id_paciente, id_doctor FROM citas WHERE id_doctor=?");
+            stmt.setInt(1, idDoctor);
+            ResultSet rs = stmt.executeQuery();
+            int doctor = 0;
+            System.out.println("Id de los Pacientes atendidos: ");
+            while (rs.next()) {                  
+                int paciente = rs.getInt("id_paciente"); 
+                doctor = rs.getInt("id_doctor");
+                
+                System.out.println(paciente);
+                System.out.println("-----------------------");
+                
+            }
+            System.out.println("Id del doctor: " + doctor + "\n");
+            rs.close();
+            stmt.close();
+
+            
+        }catch (SQLException ex){
+            
+            System.out.println("Error al eliminar cliente: " + ex.getMessage());
+            
+        }
+        
+        
+    }
+    
+    
+    
+    
     
 }
